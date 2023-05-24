@@ -42,12 +42,17 @@ exports.addIncome = async (req, res) => {
 }
 
 exports.getIncomes = async (req, res) =>{
-    try {
-        const incomes = await IncomeSchema.find().sort({createdAt: -1})
-        res.status(200).json(incomes)
-    } catch (error) {
-        res.status(500).json({message: 'Server Error'})
+    const userId = req.user._id;
+  try {
+    const allIncomes = await IncomeSchema.find({ createdBy: userId });
+    if (allIncomes) {
+      return res.status(200).json({ Data: allIncomes});
+    } else {
+      return res.status(400).json({ Error: "Not Found" });
     }
+  } catch (error) {
+    res.status(400).json({ Error: err });
+  }
 }
 
 exports.deleteIncome = async (req, res) =>{
@@ -57,7 +62,7 @@ exports.deleteIncome = async (req, res) =>{
         try {
           const deletedStore = await IncomeSchema.findOneAndDelete({
             createdBy: userId,
-            id: paramId,
+            _id: paramId,
           });
           if (deletedStore) {
             return res.status(200).json({
@@ -73,52 +78,52 @@ exports.deleteIncome = async (req, res) =>{
 };
 
 exports.updateIncome=async(req,res)=>{
-const userId = req.user._id;
-  const paramId = req.params.id;
-  const body = req.body;
-  
-  if(body.title==="" && body.category==="" && body.description==="" && body.date==="" && body.income==="" )
-   {
-    return res.status(400).json({ Error: "Empty Fields Cannot Be Updated" });
-  }
-  if (body.title === "") {
-    delete body.title;
-  }
-  if (body.category === "") {
-    delete body.category;
-  }
-  if (body.description=== "") {
-    delete body.description;
-  }
-  if (body.date === "") {
-    delete body.date;
-  }
-  if (body.amount === "") {
-    delete body.amount;
-  }
-  try {
-    const updatedIncome = await IncomeSchema.findOneAndUpdate(
-      { createdBy: userId, id: paramId },
-      body,
-      {
-        new: true,
-      }
-    );
-    if (updatedIncome) {
-      res.status(200).json({
-             _id: updatedIncome._id,
-              title: updatedIncome.title,
-              amount: updatedIncome.amount,
-              category: updatedIncome.category,
-              description: updatedIncome.description,
-              date:updatedIncome.date,
-              name: req.user.name,
-      });
-    } else {
-      res.status(400).json({ Error: "Failed to Update" });
+    const userId = req.user._id;
+    const parameter = req.params.id;
+    const body = req.body;
+    if (!body) {
+      return res.status(400).json({ Error: "Not Found" });
     }
-  } catch (error) {
-    return res.status(400).json({ Error: error });
-  }    
+    try {
+      const updatedIncome = await IncomeSchema.findOneAndUpdate(
+        { createdBy: userId, _id: parameter },
+        body,
+        {
+          new: true,
+        }
+      );
+      
+      if (updatedIncome) {
+        res.status(200).json({
+            _id: updatedIncome._id,
+            title:updatedIncome.title,
+            amount:updatedIncome.amount,
+            category: updatedIncome.category,
+            description:updatedIncome.description,
+            date:updatedIncome.date,
+            name: req.user.name,
+        });
+      } else {
+        res.status(400).json({ Error: "Failed to Update"});
+      }
+    } catch (error) {
+      return res.status(400).json({ Error: error });
+    }
+  };
 
-}
+  exports.getIncome = async (req, res) => {
+    const userId = req.user._id;
+    const paramId = req.params.id;
+    try {
+      const idIncome = await IncomeSchema.find({ createdBy: userId, _id: paramId });
+
+      if (idIncome) {
+        return res.status(200).json({ Data: idIncome });
+      } else {
+        return res.status(400).json({ Error: "Not Found" });
+      }
+    } catch (err) {
+      res.status(400).json({ Error: err });
+    }
+  };
+
