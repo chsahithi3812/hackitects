@@ -11,6 +11,10 @@ const AppStyled = styled.div`
   height: 100vh;
   background-image: url(${(props) => props.bg});
   position: relative;
+
+  main{
+    flex: 1;
+  }
 `;
 
 function App() {
@@ -26,7 +30,7 @@ function App() {
       <MainLayout>
         <Navigation active={active} setActive={setActive} />
         <main>
-          
+
         </main>
       </MainLayout>
     </AppStyled>
@@ -34,3 +38,4 @@ function App() {
 }
 
 export default App;
+
