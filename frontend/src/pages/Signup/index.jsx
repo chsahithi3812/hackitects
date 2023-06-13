@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
-import { useState } from "react";
+import { useState,useMemo } from "react";
 import axios from "axios";
+import Orb from "../../Components/Orb/Orb";
+
 function Signup() {
 	const [name, setUsername] = useState("");
 	const [email, setEmail] = useState("");
@@ -22,10 +24,17 @@ function Signup() {
 	  } catch (err) {
 		setError(true);
 	  }
-	  
+ 
 	};
+
+	
+	const orbMemo = useMemo(() => {
+		return <Orb />;
+	  }, []);
+
 	return (
 		<div className={styles.container}>
+			{orbMemo}
 			<h1 className={styles.heading}>Sign up Form</h1>
 			<div className={styles.form_container}>
 				<div className={styles.left}>

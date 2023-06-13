@@ -88,7 +88,7 @@ const DashboardStyled = styled.div`
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 2rem;
-        margin-top: 2rem;
+        margin-top: 1rem;
         .income,
         .expense {
           grid-column: span 2;
@@ -102,7 +102,7 @@ const DashboardStyled = styled.div`
           border-radius: 20px;
           padding: 1rem;
           p {
-            font-size: 3.5rem;
+            font-size: 2.2rem;
             font-weight: 700;
           }
         }
@@ -116,7 +116,7 @@ const DashboardStyled = styled.div`
           p {
             color: var(--color-green);
             opacity: 0.6;
-            font-size: 4.5rem;
+            font-size: 2.4rem;
           }
         }
       }
@@ -131,9 +131,9 @@ const DashboardStyled = styled.div`
         justify-content: space-between;
       }
       .salary-title {
-        font-size: 1.2rem;
+        font-size: 1rem;
         span {
-          font-size: 1.8rem;
+          font-size: 1.4rem;
         }
       }
       .salary-item {
@@ -147,7 +147,7 @@ const DashboardStyled = styled.div`
         align-items: center;
         p {
           font-weight: 600;
-          font-size: 1.6rem;
+          font-size: 1.4rem;
         }
       }
     }

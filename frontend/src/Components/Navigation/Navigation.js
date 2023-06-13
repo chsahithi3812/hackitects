@@ -32,7 +32,7 @@ function Navigation({ active, setActive }) {
         })}
       </ul>
       <div className="bottom-nav">
-        <button onClick={logout}>{signout} Sign Out</button> 
+        <button className="signout-btn" onClick={logout}>{signout} Sign Out</button> 
       </div>
     </NavStyled>
   );
@@ -80,7 +80,7 @@ const NavStyled = styled.nav`
     flex: 1;
     display: flex;
     flex-direction: column;
-    li,button {
+    li {
       display: grid;
       grid-template-columns: 40px auto;
       align-items: center;
@@ -99,6 +99,8 @@ const NavStyled = styled.nav`
     }
   }
 
+  
+
   .active {
     color: rgba(34, 34, 96, 1) !important;
     i {
@@ -113,6 +115,31 @@ const NavStyled = styled.nav`
       height: 100%;
       background: #222260;
       border-radius: 0 10px 10px 0;
+    }
+  }
+
+  .signout-btn {
+
+    padding: 0;
+    border: none;
+    background: none;
+    color: inherit;
+    font: inherit;
+
+    display: grid;
+    grid-template-columns: 40px auto;
+    align-items: center;
+    margin: 0.6rem 0;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+    color: rgba(34, 34, 96, 0.6);
+    padding-left: 1rem;
+    position: relative;
+    i {
+      color: rgba(34, 34, 96, 0.6);
+      font-size: 1.4rem;
+      transition: all 0.4s ease-in-out;
     }
   }
 `;
