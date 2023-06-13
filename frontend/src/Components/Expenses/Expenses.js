@@ -22,7 +22,7 @@ function Expenses() {
                         <ExpenseForm />
                     </div>
                     <div className="incomes">
-                        {expenses.map((income) => {
+                        {expenses.Data.map((income) => {
                             const {_id, title, amount, date, category, description, type} = income;
                             console.log(income)
                             return <IncomeItem
