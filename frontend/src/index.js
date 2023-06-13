@@ -17,7 +17,7 @@
 // import React from 'react';
 // import ReactDOM from 'react-dom/client';
 // import App from './App';
-// import './index.css';
+//
 // import { ContextProvider } from './context/Contex';
 // const root = ReactDOM.createRoot(document.getElementById('root'));
 // root.render (
@@ -36,6 +36,7 @@ import App from './App';
 import { GlobalStyle } from './styles/GlobalStyle';
 import { GlobalProvider } from './context/globalContext';
 import { ContextProvider } from './context/Contex';
+import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

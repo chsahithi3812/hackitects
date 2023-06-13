@@ -5,6 +5,10 @@ import { signout } from "../../utils/icons";
 import { menuItems } from "../../utils/menuItems";
 
 function Navigation({ active, setActive }) {
+  const logout =()=>{
+    localStorage.clear()
+    window.location.reload()
+}
   return (
     <NavStyled>
       <div className="user-con">
@@ -28,7 +32,7 @@ function Navigation({ active, setActive }) {
         })}
       </ul>
       <div className="bottom-nav">
-        <li>{signout} Sign Out</li>
+        <button onClick={logout}>{signout} Sign Out</button> 
       </div>
     </NavStyled>
   );
@@ -76,7 +80,7 @@ const NavStyled = styled.nav`
     flex: 1;
     display: flex;
     flex-direction: column;
-    li {
+    li,button {
       display: grid;
       grid-template-columns: 40px auto;
       align-items: center;
