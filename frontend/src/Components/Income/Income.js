@@ -20,7 +20,7 @@ function Income() {
           <Form />
         </div>
         <div className="incomes">
-           {incomes.map((income) => {
+           {incomes.Data.map((income) => {
               const {_id, title, amount, date, category, description, type} = income;
               return <IncomeItem
               key={_id}

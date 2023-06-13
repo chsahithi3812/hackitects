@@ -15,14 +15,16 @@ function Dashboard() {
     totalBalance,
     getIncomes,
     getExpenses,
-    
   } = useGlobalContext();
 
   useEffect(() => {
-    console.log("1")
+    console.log("1");
     getIncomes();
     getExpenses();
   }, []);
+
+  console.log("Incomes:", incomes);
+  console.log("Expenses:", expenses);
 
   return (
     <DashboardStyled>
@@ -58,21 +60,32 @@ function Dashboard() {
               Min <span>Salary</span>Max
             </h2>
             <div className="salary-item">
-              <p>${Math.min(...incomes.map((item) => item.amount))}</p>
-              <p>${Math.max(...incomes.map((item) => item.amount))}</p>
+              {incomes.Data && incomes.Data.length > 0 && (
+                <>
+                  <p>${Math.min(...incomes.Data.map((item) => item.amount))}</p>
+                  <p>${Math.max(...incomes.Data.map((item) => item.amount))}</p>
+                </>
+              )}
             </div>
             <h2 className="salary-title">
               Min <span>Expense</span>Max
             </h2>
             <div className="salary-item">
-              <p>${Math.min(...expenses.map((item) => item.amount))}</p>
-              <p>${Math.max(...expenses.map((item) => item.amount))}</p>
+              {expenses.Data && expenses.Data.length > 0 && (
+                <>
+                  <p>
+                    ${Math.min(...expenses.Data.map((item) => item.amount))}
+                  </p>
+                  <p>
+                    ${Math.max(...expenses.Data.map((item) => item.amount))}
+                  </p>
+                </>
+              )}
             </div>
           </div>
         </div>
       </InnerLayout>
     </DashboardStyled>
-   
   );
 }
 
