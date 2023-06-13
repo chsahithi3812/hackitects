@@ -16,13 +16,13 @@ const registerUser = async (req, res) => {
   }
 
   const newUser = await userModel.create({
-    name,
+    name, 
     email,
     password,
   });
 
   if (newUser) {
-    res.status(201).json({
+    res.status(201).json({ 
       _id: newUser._id,
       name: newUser.name,
       email: newUser.email,

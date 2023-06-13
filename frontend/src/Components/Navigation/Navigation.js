@@ -1,20 +1,21 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import styled from "styled-components";
 import avatar from "../../img/avatar-female-removebg-preview.png";
 import { signout } from "../../utils/icons";
 import { menuItems } from "../../utils/menuItems";
-
+import { Context } from "../../context/Contex";
 function Navigation({ active, setActive }) {
   const logout =()=>{
     localStorage.clear()
     window.location.reload()
 }
-  return (
+const {user}=useContext(Context);
+return (
     <NavStyled>
       <div className="user-con">
         <img src={avatar} className="img-avatar" alt="" />
         <div className="text">
-          <h2>Sahithi</h2>
+          <h2>{user.name}</h2>
           <p>Your Money</p>
         </div>
       </div>
@@ -27,8 +28,8 @@ function Navigation({ active, setActive }) {
 
               {item.icon}
               <span>{item.title}</span>
-            </li>
-          );
+            </li> 
+          ); 
         })}
       </ul>
       <div className="bottom-nav">
@@ -69,6 +70,7 @@ const NavStyled = styled.nav`
       box-shadow: 0px 1px 17px rgba(0, 0, 0, 0.06);
     }
     h2 {
+      text-transform: capitalize;
       color: rgba(34, 34, 96, 1);
     }
     p {
