@@ -15,9 +15,11 @@ function Dashboard() {
     totalBalance,
     getIncomes,
     getExpenses,
+    
   } = useGlobalContext();
 
   useEffect(() => {
+    console.log("1")
     getIncomes();
     getExpenses();
   }, []);
@@ -70,6 +72,7 @@ function Dashboard() {
         </div>
       </InnerLayout>
     </DashboardStyled>
+   
   );
 }
 

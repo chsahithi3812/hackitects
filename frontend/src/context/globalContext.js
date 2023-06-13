@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8800/api/v1/";
+ const BASE_URL = "http://localhost:8800/api/v1/";
 
 const GlobalContext = React.createContext();
 
@@ -12,31 +12,43 @@ export const GlobalProvider = ({ children }) => {
 
   //calculate incomes
   const addIncome = async (income) => {
-    const response = await axios
-      .post(`${BASE_URL}add-income`, income)
+    console.log(income)
+     const response = await axios
+      .post("/add-income", income,{headers:{
+        Authorization: "Bearer "+localStorage.getItem("jwt")
+      }})
       .catch((err) => {
         setError(err.response.data.message);
       });
-    getIncomes();
+      getIncomes();
   };
 
-  const getIncomes = async (income) => {
-    const response = await axios.get(`${BASE_URL}get-incomes`);
+  const getIncomes = async () => {
+    const response = await axios.get(`${BASE_URL}get-incomes`,{headers:{
+      Authorization: "Bearer "+localStorage.getItem("jwt")
+    }});
     setIncomes(response.data);
     console.log(response.data);
   };
 
   const deleteIncome = async (id) => {
-    const res = await axios.delete(`${BASE_URL}delete-income/${id}`);
+    const res = await axios.delete(`${BASE_URL}delete-income/${id}`,{headers:{
+      Authorization: "Bearer "+localStorage.getItem("jwt")
+    }});
     getIncomes();
   };
 
   const totalIncome = () => {
     let totalIncome = 0;
-    incomes.forEach((income) => {
+    
+    if(incomes){
+      console.log("entered")
+     incomes.forEach((income) => {
+      console.log(income.amount)
       totalIncome = totalIncome + income.amount;
-    });
-
+    })
+  }
+    console.log(totalIncome)
     return totalIncome;
   };
 
@@ -44,29 +56,38 @@ export const GlobalProvider = ({ children }) => {
 
   const addExpense = async (income) => {
     const response = await axios
-      .post(`${BASE_URL}add-expense`, income)
+      .post(`${BASE_URL}add-expense`, income,{headers:{
+        Authorization: "Bearer "+localStorage.getItem("jwt")
+      }})
       .catch((err) => {
         setError(err.response.data.message)
       });
-    getExpenses();
+   getExpenses();
   };
 
   const getExpenses = async () => {
-    const response = await axios.get(`${BASE_URL}get-expenses`);
+    const response = await axios.get(`${BASE_URL}get-expenses`,{headers:{
+      Authorization: "Bearer "+localStorage.getItem("jwt")
+    }});
     setExpenses(response.data);
     console.log(response.data);
   };
 
   const deleteExpense = async (id) => {
-    const res = await axios.delete(`${BASE_URL}delete-expense/${id}`);
+    const res = await axios.delete(`${BASE_URL}delete-expense/${id}`,{headers:{
+      Authorization: "Bearer "+localStorage.getItem("jwt")
+    }});
     getExpenses();
   };
 
   const totalExpenses = () => {
     let totalIncome = 0;
+    if(expenses){
     expenses.forEach((income) => {
       totalIncome = totalIncome + income.amount;
-    });
+    })}
+    console.log(totalIncome)
+    return totalIncome;
   };
 
   const totalBalance = () => {

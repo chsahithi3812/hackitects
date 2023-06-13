@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 
 const validateToken = async (req, res, next) => {
+  
   const { authorization } = req.headers;
   if (!authorization) {
     return res.status(400).json({ Error: "Require Login" });

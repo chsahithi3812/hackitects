@@ -2,10 +2,9 @@ const IncomeSchema= require("../models/ModelIncome")
 
 
 exports.addIncome = async (req, res) => {
+     console.log(req.body)
     const {title, amount, category, description, date}  = req.body
     const userId = req.user._id;
-   
-
     try {
         //validations
         if(!title || !category || !description || !date){
